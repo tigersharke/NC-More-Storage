@@ -5,9 +5,17 @@ local minetest, nodecore
 
 local modname = minetest.get_current_modname()
 
-local form = "nc_optics_glass_edges.png^[colorize:plum:100^(nc_lode_annealed.png^[mask:nc_optics_tank_mask.png)"
+local form = "nc_optics_glass_edges.png^[colorize:purple:100^(nc_lode_annealed.png^[mask:nc_optics_tank_mask.png)"
 
-local plum = "(nc_optics_glass_glare.png^[colorize:plum:100)^(" .. form .. ")"
+local plum = "(nc_optics_glass_glare.png^[colorize:purple:100)^(" .. form .. ")"
+
+local lode = "nc_lode_annealed.png^[mask:nc_api_storebox_frame.png"
+
+local bum = "nc_lode_annealed.png^(" .. lode .. ")"
+
+local lamp = "nc_lux_base.png^(nc_optics_glass_glare.png^[colorize:purple:75)^(" ..lode.. ")"
+
+local grate = "nc_lode_annealed.png^[mask:nc_lode_shelf_base.png"
 
 minetest.register_node(modname .. ":shelf_plum", {
 		description = "Plum Glass Case",
@@ -26,12 +34,90 @@ minetest.register_node(modname .. ":shelf_plum", {
 		},
 		paramtype = "light",
 		sounds = nodecore.sounds("nc_optics_glassy"),
+		storebox_access = function(pt) return pt.above.y > pt.under.y end
+	})
+	
+minetest.register_node(modname .. ":shelf_plum_toolrack", {
+		description = "Plumbum Tool Rack",
+		tiles = {lode, grate, lode},
+		color = "plum",
+		selection_box = nodecore.fixedbox(),
+		collision_box = nodecore.fixedbox(),
+		groups = {
+			cracky = 3,
+			visinv = 1,
+			storebox = 2,
+			totable = 1,
+			scaling_time = 50,
+			silica = 1,
+			silica_clear = 1,
+			lux_absorb = 50,
+		},
+		paramtype = "light",
+		sounds = nodecore.sounds("nc_lode_annealed"),
+		storebox_access = function(pt) return pt.above.y >= pt.under.y end
+	})
+	
+minetest.register_node(modname .. ":shelf_plumbum", {
+		description = "Plumbum Cauldron",
+		tiles = {bum, bum, lode},
+		color = "plum",
+		selection_box = nodecore.fixedbox(),
+		collision_box = nodecore.fixedbox(),
+		groups = {
+			cracky = 3,
+			visinv = 1,
+			storebox = 2,
+			totable = 1,
+			scaling_time = 50,
+			lux_absorb = 64,
+		},
+		paramtype = "light",
+		sounds = nodecore.sounds("nc_optics_glassy"),
+		storebox_access = function(pt) return pt.above.y > pt.under.y end
+	})
+
+minetest.register_node(modname .. ":plumlamp_dim", {
+		description = "Shielded Plumlamp",
+		tiles = {lamp, bum, bum},
+		color = "plum",
+		selection_box = nodecore.fixedbox(),
+		collision_box = nodecore.fixedbox(),
+		groups = {
+			cracky = 3,
+			visinv = 1,
+			totable = 1,
+			scaling_time = 50,
+			lux_absorb = 64,
+		},
+		paramtype = "light",
+		light_source = 4,
+		sounds = nodecore.sounds("nc_optics_glassy"),
 		storebox_access = function(pt) return pt.above.y > pt.under.y end,
 		on_ignite = function(pos)
-			if minetest.get_node(pos).name == modname .. ":shelf_plum" then
+			if minetest.get_node(pos).name == modname .. ":plumlamp_dim" then
 				return nodecore.stack_get(pos)
 			end
 		end
+	})
+	
+minetest.register_node(modname .. ":plumlamp_bright", {
+		description = "Plumlamp",
+		tiles = {lamp},
+		color = "plum",
+		selection_box = nodecore.fixedbox(),
+		collision_box = nodecore.fixedbox(),
+		groups = {
+			cracky = 3,
+			visinv = 1,
+			totable = 1,
+			scaling_time = 50,
+			lux_absorb = 64,
+		},
+		paramtype = "light",
+		light_source = 12,
+		sounds = nodecore.sounds("nc_optics_glassy"),
+		storebox_access = function(pt) return pt.above.y > pt.under.y end
 	})
 
 nodecore.register_craft({
@@ -47,3 +133,57 @@ nodecore.register_craft({
 			},
 		}
 	})
+
+nodecore.register_craft({
+		label = "recycle plum cauldron",
+		action = "pummel",
+		indexkeys = {modname .. ":shelf_plumbum"},
+		nodes = {
+			{match = modname .. ":shelf_plumbum",
+			replace = modname .. ":shelf_plum_toolrack"}
+		},
+		toolgroups = {thumpy = 3}
+	})
+
+nodecore.register_craft({
+		label = "assemble plumbum cauldron",
+		action = "stackapply",
+		indexkeys = {"nc_lode:form"},
+		wield = {name = "wc_plumbum:block"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = "nc_lode:form", empty = true},
+				replace = modname .. ":shelf_plumbum"
+			},
+		}
+	})
+
+nodecore.register_craft({
+		label = "assemble dim plumlamp",
+		action = "stackapply",
+		indexkeys = {modname.. ":shelf_plumbum"},
+		wield = {name = "nc_lux:cobble1"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = modname.. ":shelf_plumbum", empty = true},
+				replace = modname .. ":plumlamp_dim"
+			},
+		}
+	})
+
+nodecore.register_craft({
+		label = "assemble bright plumlamp",
+		action = "stackapply",
+		indexkeys = {modname.. ":shelf_plum"},
+		wield = {name = "nc_lux:cobble1"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = modname.. ":shelf_plum", empty = true},
+				replace = modname .. ":plumlamp_bright"
+			},
+		}
+	})
+
