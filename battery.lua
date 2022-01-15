@@ -11,15 +11,14 @@ local side = "nc_lode_annealed.png^(" .. form .. ")"
 
 local acid = "wc_meltdown_corrosive.png^(" ..form.. ")"
 
-minetest.register_node(modname .. ":shelf_acid", {
+minetest.register_node(modname .. ":battery", {
 		description = "Corrosive Battery",
-		tiles = {side, side, acid},
+		tiles = {acid, side, side},
 		selection_box = nodecore.fixedbox(),
 		collision_box = nodecore.fixedbox(),
 		groups = {
 			cracky = 4,
 			visinv = 1,
-			storebox = 2,
 			totable = 1,
 			scaling_time = 50,
 			corrosive = 1,
