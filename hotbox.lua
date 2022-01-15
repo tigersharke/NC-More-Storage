@@ -5,45 +5,43 @@ local minetest, nodecore
 
 local modname = minetest.get_current_modname()
 
-local form = "nc_lode_annealed.png^[mask:nc_api_storebox_frame.png"
+local form = "nc_lode_hot.png^[mask:nc_api_storebox_frame.png"
 
-local pum = "nc_igneous_pumice.png^(" .. form .. ")"
+local side = "nc_lode_hot.png^(" .. form .. ")"
 
-minetest.register_node(modname .. ":shelf_pumice", {
-		description = "Pumice Cauldron",
+local hotstuff = "nc_terrain_lava.png^[verticalframe:32:8"
 
-		tiles = {pum, pum, form},
+local top = "(" .. hotstuff .. ")^(" .. form .. ")"
+	
+minetest.register_node(modname .. ":shelf_cauldron_pumwater", {
+		description = "Scorching Lode Cauldron",
+		tiles = {top, side, side},
 		selection_box = nodecore.fixedbox(),
 		collision_box = nodecore.fixedbox(),
 		groups = {
-			cracky = 2,
+			cracky = 4,
 			visinv = 1,
-			flammable = 2,
-			fire_fuel = 3,
-			storebox = 1,
 			totable = 1,
-			scaling_time = 50
+			scaling_time = 50,
+			lux_emit = 1,
+			igniter = 1
 		},
 		paramtype = "light",
-		sounds = nodecore.sounds("nc_optics_glassy"),
+		light_source = 4,
+		sounds = nodecore.sounds("nc_lode_tempered"),
 		storebox_access = function(pt) return pt.above.y > pt.under.y end,
-		on_ignite = function(pos)
-			if minetest.get_node(pos).name == modname .. ":shelf_pumice" then
-				return nodecore.stack_get(pos)
-			end
-		end
 	})
 
 nodecore.register_craft({
-		label = "assemble hotbox",
+		label = "assemble scorching cauldron",
 		action = "stackapply",
-		indexkeys = {"nc_lode:form"},
-		wield = {name = "nc_igneous:pumice"},
+		indexkeys = {modname.. ":shelf_cauldron_tempered"},
+		wield = {name = "nc_igneous:amalgam"},
 		consumewield = 1,
 		nodes = {
 			{
-				match = {name = "nc_lode:form", empty = true},
-				replace = modname .. ":shelf_pumice"
+				match = {name = modname.. ":shelf_cauldron_tempered", empty = true},
+				replace = modname .. ":shelf_cauldron_pumwater"
 			},
 		}
 	})
