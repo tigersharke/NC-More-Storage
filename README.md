@@ -7,5 +7,5 @@ New ones may be added at any time.
  - wc_naturae
  - wc_plumbum
  - nc_luxgate
- - nc_pummine
  - nc_pebbles
+ - nc_pummine
