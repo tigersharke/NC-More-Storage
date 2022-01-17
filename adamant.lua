@@ -93,7 +93,6 @@ minetest.register_node(modname .. ":luxlamp", {
 		collision_box = nodecore.fixedbox(),
 		groups = {
 			cracky = 5,
-			visinv = 1,
 			totable = 1,
 			scaling_time = 50,
 			lux_emit = 10

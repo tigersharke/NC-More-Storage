@@ -22,7 +22,6 @@ minetest.register_node(modname .. ":core", {
 		collision_box = nodecore.fixedbox(),
 		groups = {
 			cracky = 4,
-			visinv = 1,
 			totable = 1,
 			scaling_time = 50,
 			corrosive = 1,

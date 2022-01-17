@@ -20,7 +20,6 @@ minetest.register_node(modname .. ":shelf_sponge", {
 		collision_box = nodecore.fixedbox(),
 		groups = {
 			cracky = 3,
-			visinv = 1,
 			totable = 1,
 			scaling_time = 60,
 			silica = 1,

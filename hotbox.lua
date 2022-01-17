@@ -20,7 +20,6 @@ minetest.register_node(modname .. ":shelf_cauldron_pumwater", {
 		collision_box = nodecore.fixedbox(),
 		groups = {
 			cracky = 4,
-			visinv = 1,
 			totable = 1,
 			scaling_time = 50,
 			lux_emit = 1,

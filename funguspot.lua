@@ -18,7 +18,6 @@ minetest.register_node(modname .. ":composter", {
 		collision_box = nodecore.fixedbox(),
 		groups = {
 			snappy = 1,
-			visinv = 1,
 			flammable = 30,
 			fire_fuel = 6,
 			totable = 1,
