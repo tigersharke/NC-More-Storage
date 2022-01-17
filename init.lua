@@ -20,6 +20,7 @@ include("sponge")				--NodeCore Alpha
 
 include("cauldron_lode")			--NodeCore Alpha
 include("toolrack")				--NodeCore Alpha
+include("shelf_lode")			--NodeCore Alpha
 
 include("powderkeg")			--NodeCore Alpha
 include("hotbox")				--NodeCore Alpha

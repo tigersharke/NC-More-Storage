@@ -11,26 +11,26 @@ local form = "nc_lode_"..name..".png^[mask:nc_api_storebox_frame.png"
 
 local side = "nc_lode_"..name..".png^(" .. form .. ")"
 
-minetest.register_node(modname .. ":shelf_cauldron_" ..name, {
-		description = desc.. " Lode Cauldron",
-		tiles = {side, side, form},
+minetest.register_node(modname .. ":shelf_lode_" ..name, {
+		description = desc.. " Lode Shelf",
+		tiles = {form, side, side},
 		selection_box = nodecore.fixedbox(),
 		collision_box = nodecore.fixedbox(),
 		groups = {
 			cracky = 3,
 			visinv = 1,
 			lode_cube = 1,
-			storebox = 2,
+			storebox = 1,
 			totable = 1,
-			scaling_time = 50,
+			scaling_time = 40,
 			metallic = 1,
-			lode_cauldron = 1,
+			storagelode =1,
 			damage_touch = dmg
 		},
 		paramtype = "light",
 		sunlight_propagates = true,
 		sounds = nodecore.sounds(sound),
-		storebox_access = function(pt) return pt.above.y > pt.under.y end,
+		storebox_access = function(pt) return pt.above.y == pt.under.y end,
 	})
 
 end
@@ -40,46 +40,29 @@ temper("tempered",	"Tempered",	"nc_lode_tempered",	false,	0)
 temper("hot",		"Glowing",	"nc_lode_annealed",	true,	0)
 
 nodecore.register_craft({
-		label = "heat lode cauldron",
+		label = "heat lode shelf",
 		action = "cook",
 		touchgroups = {flame = 3},
 		duration = 30,
 		cookfx = true,
-		indexkeys = {"group:lode_cauldron"},
+		indexkeys = {"group:storagelode"},
 		nodes = {
 			{
-				match = {groups = {lode_cauldron = true}},
-				replace = modname .. ":shelf_cauldron_hot"
+				match = {groups = {storagelode = true}},
+				replace = modname .. ":shelf_lode_hot"
 			}
 		}
 	})
 
 
 nodecore.register_craft({
-		label = "assemble cauldron",
-		action = "stackapply",
-		indexkeys = {"nc_lode:form"},
-		wield = {name = "nc_lode:block_annealed"},
-		consumewield = 1,
+		label = "recycle lode cauldron",
+		action = "pummel",
+		indexkeys = {modname .. ":shelf_cauldron_annealed"},
 		nodes = {
-			{
-				match = {name = "nc_lode:form", empty = true},
-				replace = modname .. ":shelf_cauldron_annealed"
-			},
-		}
+			{match = modname .. ":shelf_cauldron_annealed",
+			replace = modname .. ":shelf_lode_annealed"}
+		},
+		
+		toolgroups = {choppy = 4}
 	})
-	
-nodecore.register_craft({
-		label = "assemble tempered cauldron",
-		action = "stackapply",
-		indexkeys = {"nc_lode:form"},
-		wield = {name = "nc_lode:block_tempered"},
-		consumewield = 1,
-		nodes = {
-			{
-				match = {name = "nc_lode:form", empty = true},
-				replace = modname .. ":shelf_cauldron_tempered"
-			},
-		}
-	})
-
