@@ -11,6 +11,8 @@ local ilmenite = "block_ilmenite.png^(" .. form .. ")"
 
 local sand = "nc_terrain_gravel.png^(nc_terrain_sand.png^[mask:nc_lode_mask_sign.png)^(" .. form .. ")"
 
+local grate = "block_ilmenite.png^[mask:nc_lode_shelf_base.png^(" .. form .. ")"
+
 minetest.register_node(modname .. ":shelf_ilmenite", {
 		description = "Ilmenite Shelf",
 		tiles = {form, ilmenite},
@@ -36,7 +38,7 @@ minetest.register_node(modname .. ":shelf_ilmenite", {
 
 minetest.register_node(modname .. ":shelf_ilmenite_rack", {
 		description = "Ilmenite Tool Rack",
-		tiles = {form, ilmenite, form},
+		tiles = {form, grate, form},
 		selection_box = nodecore.fixedbox(),
 		collision_box = nodecore.fixedbox(),
 		groups = {
@@ -87,7 +89,6 @@ minetest.register_node(modname .. ":shelf_ilmenite_grinder", {
 		collision_box = nodecore.fixedbox(),
 		groups = {
 			cracky = 3,
-			visinv = 1,
 			totable = 1,
 			scaling_time = 50,
 			lux_absorb = 20,
