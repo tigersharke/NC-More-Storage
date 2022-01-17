@@ -15,7 +15,9 @@ local bum = "nc_lode_annealed.png^(" .. lode .. ")"
 
 local lamp = "nc_lux_base.png^(nc_optics_glass_glare.png^[colorize:purple:75)^(" ..lode.. ")"
 
-local grate = "nc_lode_annealed.png^[mask:nc_lode_shelf_base.png"
+local grate = "nc_lode_annealed.png^[mask:nc_lode_shelf_base.png^(" ..lode.. ")"
+
+local port = "nc_lode_annealed.png^[mask:nc_lode_shelf_side.png^(" ..lode.. ")"
 
 minetest.register_node(modname .. ":shelf_plum", {
 		description = "Plum Glass Case",
@@ -59,6 +61,44 @@ minetest.register_node(modname .. ":shelf_plum_toolrack", {
 	})
 	
 minetest.register_node(modname .. ":shelf_plumbum", {
+		description = "Plumbum Shelf",
+		tiles = {lode, grate, grate},
+		color = "plum",
+		selection_box = nodecore.fixedbox(),
+		collision_box = nodecore.fixedbox(),
+		groups = {
+			cracky = 3,
+			visinv = 1,
+			storebox = 2,
+			totable = 1,
+			scaling_time = 40,
+			lux_absorb = 55,
+		},
+		paramtype = "light",
+		sounds = nodecore.sounds("nc_optics_glassy"),
+		storebox_access = function(pt) return pt.above.y > pt.under.y end
+	})
+
+minetest.register_node(modname .. ":shelf_plum_crate", {
+		description = "Plumbum Crate",
+		tiles = {port, grate, port},
+		color = "plum",
+		selection_box = nodecore.fixedbox(),
+		collision_box = nodecore.fixedbox(),
+		groups = {
+			cracky = 3,
+			visinv = 1,
+			storebox = 2,
+			totable = 1,
+			scaling_time = 40,
+			lux_absorb = 55,
+		},
+		paramtype = "light",
+		sounds = nodecore.sounds("nc_optics_glassy"),
+		storebox_access = function(pt) return pt.above.y > pt.under.y end
+	})	
+	
+minetest.register_node(modname .. ":shelf_plum_cauldron", {
 		description = "Plumbum Cauldron",
 		tiles = {bum, bum, lode},
 		color = "plum",
@@ -85,7 +125,6 @@ minetest.register_node(modname .. ":plumlamp_dim", {
 		collision_box = nodecore.fixedbox(),
 		groups = {
 			cracky = 3,
-			visinv = 1,
 			totable = 1,
 			scaling_time = 50,
 			lux_absorb = 64,
@@ -109,7 +148,6 @@ minetest.register_node(modname .. ":plumlamp_bright", {
 		collision_box = nodecore.fixedbox(),
 		groups = {
 			cracky = 3,
-			visinv = 1,
 			totable = 1,
 			scaling_time = 50,
 			lux_absorb = 64,
@@ -135,17 +173,6 @@ nodecore.register_craft({
 	})
 
 nodecore.register_craft({
-		label = "recycle plum cauldron",
-		action = "pummel",
-		indexkeys = {modname .. ":shelf_plumbum"},
-		nodes = {
-			{match = modname .. ":shelf_plumbum",
-			replace = modname .. ":shelf_plum_toolrack"}
-		},
-		toolgroups = {thumpy = 3}
-	})
-
-nodecore.register_craft({
 		label = "assemble plumbum cauldron",
 		action = "stackapply",
 		indexkeys = {"nc_lode:form"},
@@ -154,7 +181,7 @@ nodecore.register_craft({
 		nodes = {
 			{
 				match = {name = "nc_lode:form", empty = true},
-				replace = modname .. ":shelf_plumbum"
+				replace = modname .. ":shelf_plum_cauldron"
 			},
 		}
 	})
@@ -187,3 +214,47 @@ nodecore.register_craft({
 		}
 	})
 
+nodecore.register_craft({
+		label = "recycle plum cauldron",
+		action = "pummel",
+		indexkeys = {modname .. ":shelf_plum_cauldron"},
+		nodes = {
+			{match = modname .. ":shelf_plum_cauldron",
+			replace = modname .. ":shelf_plum_crate"}
+		},
+		toolgroups = {thumpy = 3}
+	})
+	
+nodecore.register_craft({
+		label = "recycle plum crate",
+		action = "pummel",
+		indexkeys = {modname .. ":shelf_plum_crate"},
+		nodes = {
+			{match = modname .. ":shelf_plum_crate",
+			replace = modname .. ":shelf_plumbum"}
+		},
+		toolgroups = {thumpy = 3}
+	})
+
+nodecore.register_craft({
+		label = "recycle plum shelf",
+		action = "pummel",
+		indexkeys = {modname .. ":shelf_plumbum"},
+		nodes = {
+			{match = modname .. ":shelf_plumbum",
+			replace = modname .. ":shelf_plum_toolrack"}
+		},
+		toolgroups = {thumpy = 3}
+	})
+
+nodecore.register_craft({
+		label = "recycle plum rack",
+		action = "pummel",
+		indexkeys = {modname .. ":shelf_plum_toolrack"},
+		nodes = {
+			{match = modname .. ":shelf_plum_toolrack",
+			replace = "wc_plumbum:block"}
+		},
+		items = {"nc_lode:prill_annealed", count = 4, scatter = 2},
+		toolgroups = {thumpy = 3}
+	})
