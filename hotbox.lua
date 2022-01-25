@@ -44,3 +44,14 @@ nodecore.register_craft({
 			},
 		}
 	})
+	
+nodecore.register_ambiance({
+		label = "hotbox ambiance",
+		nodenames = {modname.. ":shelf_cauldron_pumwater"},
+		neighbors = {"air"},
+		interval = 20,
+		chance = 20,
+		sound_name = "nc_terrain_bubbly",
+		sound_gain = 0.2
+	})
+

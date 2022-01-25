@@ -148,3 +148,13 @@ nodecore.register_craft({
 				{name = "nc_woodwork:toolhead_mallet", count = 1}
 			}
 	})
+	
+nodecore.register_ambiance({
+		label = "water barrel ambiance",
+		nodenames = {modname.. ":shelf_water_barrel"},
+		neighbors = {"air"},
+		interval = 20,
+		chance = 20,
+		sound_name = "nc_terrain_watery",
+		sound_gain = 0.2
+	})

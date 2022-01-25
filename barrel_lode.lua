@@ -192,3 +192,13 @@ nodecore.register_craft({
 			},
 		}
 	})
+
+nodecore.register_ambiance({
+		label = "lode water barrel ambiance",
+		nodenames = {modname.. ":shelf_lode_barrel_water"},
+		neighbors = {"air"},
+		interval = 20,
+		chance = 20,
+		sound_name = "nc_terrain_watery",
+		sound_gain = 0.2
+	})
