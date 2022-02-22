@@ -7,7 +7,7 @@ local modname = minetest.get_current_modname()
 
 local bark = "nc_tree_tree_side.png^[mask:nc_api_storebox_frame.png"
 
-local bamboo = "wc_naturae_bamboo.png^(nc_flora_wicker.png^[opacity:120)^(" .. bark .. ")"
+local bamboo = "(wc_naturae_bamboo_dead.png)^(" .. bark .. ")"
 
 minetest.register_node(modname .. ":shelf_bamboo_basket", {
 		description = "Bamboo Basket",

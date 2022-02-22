@@ -22,7 +22,6 @@ minetest.register_node(modname .. ":powderkeg", {
 		collision_box = nodecore.fixedbox(),
 		groups = {
 			snappy = 1,
-			visinv = 1,
 			flammable = 1,
 			fire_fuel = 8,
 			totable = 1,

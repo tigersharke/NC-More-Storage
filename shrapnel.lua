@@ -18,7 +18,6 @@ minetest.register_node(modname .. ":bomb", {
 		collision_box = nodecore.fixedbox(),
 		groups = {
 			snappy = 1,
-			visinv = 1,
 			flammable = 50,
 			fire_fuel = 1,
 			totable = 1,

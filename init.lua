@@ -25,25 +25,40 @@ include("shelf_lode")			--NodeCore Alpha
 include("powderkeg")			--NodeCore Alpha
 include("hotbox")				--NodeCore Alpha
 
-include("pumice")				--NC PumMine
-include("shrapnel")				--NC PumMine
+if minetest.get_modpath("nc_pummine") then
+	include("pumice")
+	include("shrapnel")
+end
 
-include("bamboo")				--WC Naturae
-include("thorns")				--WC Naturae
-include("hedge")				--WC Naturae
-include("funguspot")			--WC Naturae
+if minetest.get_modpath("wc_naturae") then
+	include("bamboo")
+	include("thorns")
+	include("hedge")
+	include("funguspot")
+	include("shell")
+end
 
-include("shell")				--NC Pebbles
+if minetest.get_modpath("wc_adamant") then
+	include("adamant")
+end
 
-include("adamant")				--WC Adamant
+if minetest.get_modpath("wc_plumbum") then
+	include("plumbum")
+	include("fruit")
+end
 
-include("plumbum")				--WC Plumbum
-include("fruit")				--WC Plumbum
+if minetest.get_modpath("wc_meltdown") then
+	include("battery")
+	include("core")
+end
 
-include("battery")				--WC Meltdown
-include("core")				--WC Meltdown		-WC Adamant
+if minetest.get_modpath("nc_luxgate") then
+	include("ilmenite")
+end
 
-include("ilmenite")				--NC LuxGate
+if minetest.get_modpath("nc_cats") then
+	include("catbox")
+end
 
 --include("euthamia")			--NC Euthamia
 

@@ -189,12 +189,12 @@ nodecore.register_craft({
 nodecore.register_craft({
 		label = "assemble dim plumlamp",
 		action = "stackapply",
-		indexkeys = {modname.. ":shelf_plumbum"},
+		indexkeys = {modname.. ":shelf_plum_cauldron"},
 		wield = {name = "nc_lux:cobble1"},
 		consumewield = 1,
 		nodes = {
 			{
-				match = {name = modname.. ":shelf_plumbum", empty = true},
+				match = {name = modname.. ":shelf_plum_cauldron", empty = true},
 				replace = modname .. ":plumlamp_dim"
 			},
 		}

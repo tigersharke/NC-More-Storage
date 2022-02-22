@@ -54,7 +54,6 @@ nodecore.register_craft({
 		}
 	})
 
-
 nodecore.register_craft({
 		label = "assemble cauldron",
 		action = "stackapply",

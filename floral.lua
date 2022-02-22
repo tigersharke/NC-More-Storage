@@ -35,7 +35,7 @@ minetest.register_node(modname .. ":shelf_floral", {
 	})
 
 nodecore.register_craft({
-		label = "assemble thatch basket",
+		label = "assemble floral basket",
 		action = "stackapply",
 		indexkeys = {"nc_woodwork:form"},
 		wield = {name = "nc_tree:peat"},
