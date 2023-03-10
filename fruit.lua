@@ -24,6 +24,7 @@ minetest.register_node(modname .. ":shelf_fruit", {
 			fire_fuel = 3,
 			storebox = 1,
 			totable = 1,
+			basketable = 1,
 			scaling_time = 50,
 			lux_absorb = 4
 		},

@@ -40,6 +40,20 @@ temper("tempered",	"Tempered",	"nc_lode_tempered",	false,	0)
 temper("hot",		"Glowing",	"nc_lode_annealed",	true,	0)
 
 nodecore.register_craft({
+		label = "assemble lode shelf",
+		action = "stackapply",
+		indexkeys = {"nc_lode:form"},
+		wield = {name = "nc_lode:rod_annealed"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = "nc_lode:form", empty = true},
+				replace = modname .. ":shelf_lode_annealed"
+			},
+		}
+	})
+
+nodecore.register_craft({
 		label = "heat lode shelf",
 		action = "cook",
 		touchgroups = {flame = 3},
@@ -56,13 +70,14 @@ nodecore.register_craft({
 
 
 nodecore.register_craft({
-		label = "recycle lode cauldron",
+		label = "recycle lode shelf",
 		action = "pummel",
-		indexkeys = {modname .. ":shelf_cauldron_annealed"},
+		indexkeys = {modname .. ":shelf_lode_annealed"},
 		nodes = {
-			{match = modname .. ":shelf_cauldron_annealed",
-			replace = modname .. ":shelf_lode_annealed"}
+			{match = modname .. ":shelf_lode_annealed",
+			replace = modname .. ":shelf_toolrack_annealed"},
+			{y = -1, match = "nc_lode:block_tempered"}
 		},
 		
-		toolgroups = {choppy = 4}
+		toolgroups = {choppy = 5}
 	})

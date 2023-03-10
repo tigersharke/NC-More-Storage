@@ -17,7 +17,7 @@ local knob = "nc_lode_annealed.png^[mask:" ..modname.. "_knob_mask.png"
 
 local lid = "nc_woodwork_plank.png^(" .. form .. ")^(" .. knob .. ")"
 
-local water = "nc_terrain_water.png^[verticalframe:32:8"
+local water = "(nc_terrain_water.png^[verticalframe:32:8)^[opacity:160"
 
 local top = "(" ..water.. ")^(" ..form.. ")"
 
@@ -25,6 +25,7 @@ local top = "(" ..water.. ")^(" ..form.. ")"
 minetest.register_node(modname .. ":shelf_lode_barrel", {
 		description = "Reinforced Wooden Barrel",
 		tiles = {wood, open, form},
+		use_texture_alpha = "blend",
 		selection_box = nodecore.fixedbox(),
 		collision_box = nodecore.fixedbox(),
 		groups = {

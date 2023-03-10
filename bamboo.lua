@@ -61,7 +61,7 @@ nodecore.register_craft({
 		label = "assemble bamboo shelf",
 		action = "stackapply",
 		indexkeys = {"nc_woodwork:form"},
-		wield = {name = "wc_naturae:bamboo_pole"},
+		wield = {name = "wc_naturae:bamboo_dead_2"},
 		consumewield = 1,
 		nodes = {
 			{
@@ -75,7 +75,7 @@ nodecore.register_craft({
 		label = "assemble bamboo basket",
 		action = "stackapply",
 		indexkeys = {modname.. ":shelf_bamboo"},
-		wield = {name = "wc_naturae:bamboo_pole"},
+		wield = {name = "wc_naturae:bamboo_dead_2"},
 		consumewield = 1,
 		nodes = {
 			{

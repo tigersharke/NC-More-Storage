@@ -2,13 +2,18 @@
 local minetest, nodecore
     = minetest, nodecore
 -- LUALOCALS > ---------------------------------------------------------
-
 local modname = minetest.get_current_modname()
-
+------------------------------------------------------------------------
+local rfcall = function(pos, data)
+	local ref = minetest.get_player_by_name(data.pname)
+	local wield = ref:get_wielded_item()
+	wield:take_item(1)
+	ref:set_wielded_item(wield)
+end
+------------------------------------------------------------------------
 local bark = "nc_tree_tree_side.png^[mask:nc_api_storebox_frame.png"
-
 local wick = "nc_flora_wicker.png^(" .. bark .. ")"
-
+------------------------------------------------------------------------
 minetest.register_node(modname .. ":shelf_wicker", {
 		description = "Wicker Shelf",
 --		tiles = {bark, wick},
@@ -22,6 +27,7 @@ minetest.register_node(modname .. ":shelf_wicker", {
 			fire_fuel = 3,
 			storebox = 1,
 			totable = 1,
+			basketable = 1,
 			scaling_time = 50
 		},
 		paramtype = "light",
@@ -35,7 +41,7 @@ minetest.register_node(modname .. ":shelf_wicker", {
 	})
 	
 minetest.register_node(modname .. ":shelf_wicker_basket", {
-		description = "Wicker Basket",
+		description = "Wicker Box",
 --		tiles = {bark, wick},
 		tiles = {wick, wick, bark},
 		selection_box = nodecore.fixedbox(),
@@ -47,6 +53,7 @@ minetest.register_node(modname .. ":shelf_wicker_basket", {
 			fire_fuel = 3,
 			storebox = 1,
 			totable = 1,
+			basketable = 1,
 			scaling_time = 50
 		},
 		paramtype = "light",
@@ -60,21 +67,19 @@ minetest.register_node(modname .. ":shelf_wicker_basket", {
 	})
 
 nodecore.register_craft({
-		label = "assemble wicker shelf",
-		action = "stackapply",
-		indexkeys = {"nc_woodwork:form"},
-		wield = {name = "nc_flora:wicker"},
-		consumewield = 1,
-		nodes = {
-			{
-				match = {name = "nc_woodwork:form", empty = true},
-				replace = modname .. ":shelf_wicker"
-			},
-		}
-	})
+	label = "assemble wicker shelves",
+	indexkeys = {"nc_flora:wicker"},
+	nodes = {
+		{match = "nc_flora:wicker", replace = "air"},
+		{x = -1, match = "nc_woodwork:form", replace = modname.. ":shelf_wicker"},
+		{x = 1, match = "nc_woodwork:form", replace = modname.. ":shelf_wicker"},
+		{z = -1, match = "nc_woodwork:form", replace = modname.. ":shelf_wicker"},
+		{z = 1, match = "nc_woodwork:form", replace = modname.. ":shelf_wicker"},
+	},
+})
 
 nodecore.register_craft({
-		label = "assemble wicker basket",
+		label = "assemble wicker box",
 		action = "stackapply",
 		indexkeys = {modname.. ":shelf_wicker"},
 		wield = {name = "nc_flora:wicker"},

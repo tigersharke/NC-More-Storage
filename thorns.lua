@@ -22,8 +22,9 @@ minetest.register_node(modname .. ":shelf_thorns", {
 			fire_fuel = 3,
 			storebox = 1,
 			totable = 1,
-			scaling_time = 50
---			damage_touch = 1
+			basketable = 1,
+			scaling_time = 50,
+			damage_touch = 1
 		},
 		paramtype = "light",
 		damage_per_second = 1,

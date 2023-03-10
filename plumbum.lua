@@ -9,15 +9,15 @@ local form = "nc_optics_glass_edges.png^[colorize:purple:100^(nc_lode_annealed.p
 
 local plum = "(nc_optics_glass_glare.png^[colorize:purple:100)^(" .. form .. ")"
 
-local lode = "nc_lode_annealed.png^[mask:nc_api_storebox_frame.png"
+local lode = "wc_plumbum.png^[mask:nc_api_storebox_frame.png"
 
-local bum = "nc_lode_annealed.png^(" .. lode .. ")"
+local bum = "wc_plumbum.png^(" .. lode .. ")"
 
 local lamp = "nc_lux_base.png^(nc_optics_glass_glare.png^[colorize:purple:75)^(" ..lode.. ")"
 
-local grate = "nc_lode_annealed.png^[mask:nc_lode_shelf_base.png^(" ..lode.. ")"
+local grate = "wc_plumbum.png^[mask:nc_lode_shelf_base.png^(" ..lode.. ")"
 
-local port = "nc_lode_annealed.png^[mask:nc_lode_shelf_side.png^(" ..lode.. ")"
+local port = "wc_plumbum.png^[mask:nc_lode_shelf_side.png^(" ..lode.. ")"
 
 minetest.register_node(modname .. ":shelf_plum", {
 		description = "Plum Glass Case",

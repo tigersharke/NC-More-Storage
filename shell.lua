@@ -29,6 +29,7 @@ minetest.register_node(modname .. ":shelf_shell", {
 			fire_fuel = 3,
 			storebox = 1,
 			totable = 1,
+			basketable = 1,
 			scaling_time = 50
 		},
 		paramtype = "light",
@@ -45,7 +46,7 @@ nodecore.register_craft({
 		label = "assemble shell Basket",
 		action = "stackapply",
 		indexkeys = {modname.. ":shelf_wicker"},
-		wield = {name = "nc_pebbles:shell"},
+		wield = {name = modname.. ":shell"},
 		consumewield = 1,
 		nodes = {
 			{

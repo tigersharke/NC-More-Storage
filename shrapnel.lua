@@ -41,7 +41,7 @@ nodecore.register_craft({
 		consumewield = 100,
 		nodes = {
 			{
-				match = {name = modname.. ":shelf_pumice", empty = true},
+				match = {name = modname.. ":shelf_pumice_cauldron", empty = true},
 				replace = modname .. ":bomb"
 			},
 		}

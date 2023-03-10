@@ -25,6 +25,7 @@ minetest.register_node(modname .. ":shelf_catbox", {
 			fire_fuel = 3,
 			storebox = 1,
 			totable = 1,
+			basketable = 1,
 			scaling_time = 50
 		},
 		paramtype = "light",
@@ -62,16 +63,16 @@ minetest.register_node(modname .. ":shelf_cats_barrel", {
 	})
 
 
-nodecore.register_craft({
-		label = "assemble litter basket",
-		action = "stackapply",
-		indexkeys = {modname.. ":shelf_thatch"},
-		wield = {name = "nc_concrete:aggregate"},
-		consumewield = 1,
-		nodes = {
-			{
-				match = {name = modname.. ":shelf_thatch", empty = true},
-				replace = modname .. ":shelf_catbox"
-			},
-		}
-	})
+--nodecore.register_craft({
+--		label = "assemble litter basket",
+--		action = "stackapply",
+--		indexkeys = {modname.. ":shelf_thatch"},
+--		wield = {name = "nc_concrete:aggregate"},
+--		consumewield = 1,
+--		nodes = {
+--			{
+--				match = {name = modname.. ":shelf_thatch", empty = true},
+--				replace = modname .. ":shelf_catbox"
+--			},
+--		}
+--	})

@@ -27,6 +27,7 @@ minetest.register_node(modname .. ":shelf_egg", {
 			fire_fuel = 3,
 			storebox = 1,
 			totable = 1,
+			basketable = 1,
 			scaling_time = 50
 		},
 		paramtype = "light",
@@ -65,6 +66,7 @@ minetest.register_node(modname .. ":shelf_egg_lid", {
 			fire_fuel = 3,
 			storebox = 1,
 			totable = 1,
+			basketable = 1,
 			scaling_time = 50
 		},
 		paramtype = "light",

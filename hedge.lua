@@ -26,6 +26,7 @@ minetest.register_node(modname .. ":hedge", {
 			flammable = 3,
 			fire_fuel = 3,
 			totable = 1,
+			basketable = 1,
 			scaling_time = 50
 		},
 		paramtype = "light",
@@ -72,8 +73,8 @@ end
 minetest.register_abm({
 		label = "box hedge spreading",
 		nodenames = {modname.. ":hedge"},
-		interval = 1,
-		chance = 1,
+		interval = 20,
+		chance = 4,
 		action = function(pos, node)
 			if not fertile(pos) then return end
 			local gro = {

@@ -19,7 +19,6 @@ minetest.register_node(modname .. ":shelf_toolrack_" ..name, {
 		groups = {
 			cracky = 3,
 			visinv = 1,
-			lode_cube = 1,
 			storebox = 2,
 			totable = 1,
 			scaling_time = 50,
@@ -30,7 +29,7 @@ minetest.register_node(modname .. ":shelf_toolrack_" ..name, {
 		paramtype = "light",
 		sunlight_propagates = true,
 		sounds = nodecore.sounds(sound),
-		storebox_access = function() return true end,
+		storebox_access = function(pt) return pt.above.y >= pt.under.y end,
 	})
 
 end
@@ -48,7 +47,7 @@ nodecore.register_craft({
 		indexkeys = {"group:lode_toolrack"},
 		nodes = {
 			{
-				match = {groups = {lode_cobble = true}},
+				match = {groups = {lode_toolrack = true}},
 				replace = modname .. ":shelf_toolrack_hot"
 			}
 		}

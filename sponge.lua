@@ -53,3 +53,17 @@ nodecore.register_craft({
 			},
 		}
 	})
+
+nodecore.register_craft({
+	label = "break aquarium apart",
+	action = "pummel",
+	indexkeys = {modname.. ":shelf_sponge"},
+	nodes = {
+			{
+				match = {name = modname.. ":shelf_sponge"},
+				replace = "nc_sponge:sponge_living"
+			},
+		},
+	items = {"nc_optics:glass_crude"},
+	toolgroups = {cracky = 3, thumpy = 3}
+})
