@@ -39,46 +39,55 @@ temper("tempered",	"Tempered",	"nc_lode_tempered",	false,	0)
 temper("hot",		"Glowing",	"nc_lode_annealed",	true,	0)
 
 nodecore.register_craft({
-		label = "heat lode toolrack",
-		action = "cook",
-		touchgroups = {flame = 3},
-		duration = 30,
-		cookfx = true,
-		indexkeys = {"group:lode_toolrack"},
-		nodes = {
-			{
-				match = {groups = {lode_toolrack = true}},
-				replace = modname .. ":shelf_toolrack_hot"
-			}
+	label = "heat lode toolrack",
+	action = "cook",
+	touchgroups = {flame = 3},
+	duration = 30,
+	cookfx = true,
+	indexkeys = {"group:lode_toolrack"},
+	nodes = {
+		{
+			match = {groups = {lode_toolrack = true}},
+			replace = modname .. ":shelf_toolrack_hot"
 		}
-	})
+	}
+})
 
 
 nodecore.register_craft({
-		label = "assemble toolrack",
-		action = "stackapply",
-		indexkeys = {"nc_lode:form"},
-		wield = {name = "nc_lode:prill_annealed"},
-		consumewield = 1,
-		nodes = {
-			{
-				match = {name = "nc_lode:form", empty = true},
-				replace = modname .. ":shelf_toolrack_annealed"
-			},
-		}
-	})
+	label = "assemble toolrack",
+	action = "stackapply",
+	indexkeys = {"nc_lode:form"},
+	wield = {name = "nc_lode:prill_annealed"},
+	consumewield = 1,
+	nodes = {
+		{
+			match = {name = "nc_lode:form", empty = true},
+			replace = modname .. ":shelf_toolrack_annealed"
+		},
+	}
+})
 	
 nodecore.register_craft({
-		label = "assemble tempered toolrack",
-		action = "stackapply",
-		indexkeys = {"nc_lode:form"},
-		wield = {name = "nc_lode:prill_tempered"},
-		consumewield = 1,
-		nodes = {
-			{
-				match = {name = "nc_lode:form", empty = true},
-				replace = modname .. ":shelf_toolrack_tempered"
-			},
-		}
-	})
+	label = "assemble tempered toolrack",
+	action = "stackapply",
+	indexkeys = {"nc_lode:form"},
+	wield = {name = "nc_lode:prill_tempered"},
+	consumewield = 1,
+	nodes = {
+		{
+			match = {name = "nc_lode:form", empty = true},
+			replace = modname .. ":shelf_toolrack_tempered"
+		},
+	}
+})
 
+nodecore.register_craft({
+	label = "disassemble toolrack",
+	action = "pummel",
+	duration = 4,
+	toolgroups = {choppy = 5},
+	indexkeys = {modname..":shelf_toolrack_annealed"},
+	nodes = {{match = {name = modname..":shelf_toolrack_annealed", empty = true}, replace = "nc_lode:form"}},
+	items = {{name = "nc_lode:prill_annealed", count = 1, scatter = 2}}
+})

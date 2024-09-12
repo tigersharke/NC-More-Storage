@@ -25,7 +25,7 @@ include("shelf_lode")			--NodeCore Alpha
 include("powderkeg")			--NodeCore Alpha
 include("hotbox")				--NodeCore Alpha
 
-if minetest.get_modpath("nc_pummine") then
+if minetest.get_modpath("nc_pummine") or minetest.get_modpath("wc_vulcan") then
 	include("pumice")
 	include("shrapnel")
 end

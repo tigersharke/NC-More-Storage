@@ -7,38 +7,34 @@ local modname = minetest.get_current_modname()
 
 local form = "nc_optics_glass_edges.png^(nc_tree_tree_side.png^[mask:nc_optics_tank_mask.png)"
 
-local glass = "nc_optics_glass_glare.png^(" .. form .. ")"
+local glass = "nc_optics_glass_glare.png" --^(" .. form .. ")"
 
 local sponge = "nc_sponge.png^nc_sponge_living.png^(nc_terrain_water.png^[opacity:96)"
 
-local side = "("..sponge..")^("..glass..")^("..form..")"
+local side = "("..sponge..")^("..glass..")" --^("..form..")"
 
 minetest.register_node(modname .. ":shelf_sponge", {
-		description = "Aquarium",
-		tiles = {side},
-		selection_box = nodecore.fixedbox(),
-		collision_box = nodecore.fixedbox(),
-		groups = {
-			cracky = 3,
-			totable = 1,
-			scaling_time = 60,
-			silica = 1,
-			silica_clear = 1,
-			moist = 1,
-			coolant = 1,
-			flammable = 60,
-			fire_fuel = 2
-		},
-		paramtype = "light",
-		sunlight_propagates = true,
-		air_pass = false,
-		sounds = nodecore.sounds("nc_optics_glassy"),
-		on_ignite = function(pos)
-			if minetest.get_node(pos).name == modname .. ":shelf_sponge" then
-				return nodecore.stack_get(pos)
-			end
-		end
-	})
+	description = "Aquarium",
+	tiles = {form, side},
+	drawtype = "glasslike_framed",
+	selection_box = nodecore.fixedbox(),
+	collision_box = nodecore.fixedbox(),
+	groups = {
+		cracky = 3,
+		totable = 1,
+		scaling_time = 60,
+		silica = 1,
+		silica_clear = 1,
+		moist = 1,
+		coolant = 1,
+		stack_as_node = 1,
+	},
+	paramtype = "light",
+	stack_max = 1,
+	sunlight_propagates = true,
+	air_pass = false,
+	sounds = nodecore.sounds("nc_optics_glassy")
+})
 
 nodecore.register_craft({
 		label = "assemble aquarium",

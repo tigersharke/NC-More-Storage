@@ -21,6 +21,7 @@ minetest.register_node(modname .. ":composter", {
 			flammable = 30,
 			fire_fuel = 6,
 			totable = 1,
+			basketable = 1,
 			scaling_time = 60,
 			moist = 1,
 			soil = 4,
