@@ -13,7 +13,7 @@ local soil = "nc_terrain_dirt.png^wc_naturae_mycelium.png^(" .. form .. ")"
 
 minetest.register_node(modname .. ":composter", {
 		description = "Funguspot",
-		tiles = {soil, open, wood},
+		tiles = {soil, wood},
 		selection_box = nodecore.fixedbox(),
 		collision_box = nodecore.fixedbox(),
 		groups = {

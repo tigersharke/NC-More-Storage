@@ -13,7 +13,7 @@ local soil = "nc_tree_humus.png^(" .. form .. ")"
 
 minetest.register_node(modname .. ":flowerpot", {
 		description = "Flowerpot",
-		tiles = {soil, open, wood},
+		tiles = {soil, wood},
 		selection_box = nodecore.fixedbox(),
 		collision_box = nodecore.fixedbox(),
 		groups = {
