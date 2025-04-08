@@ -87,6 +87,16 @@ nodecore.register_craft({
 	action = "pummel",
 	duration = 4,
 	toolgroups = {choppy = 5},
+	indexkeys = {modname..":shelf_toolrack_hot"},
+	nodes = {{match = {name = modname..":shelf_toolrack_hot", empty = true}, replace = "nc_lode:form"}},
+	items = {{name = "nc_lode:prill_hot", count = 1, scatter = 2}}
+})
+
+nodecore.register_craft({
+	label = "disassemble toolrack",
+	action = "pummel",
+	duration = 4,
+	toolgroups = {choppy = 5},
 	indexkeys = {modname..":shelf_toolrack_annealed"},
 	nodes = {{match = {name = modname..":shelf_toolrack_annealed", empty = true}, replace = "nc_lode:form"}},
 	items = {{name = "nc_lode:prill_annealed", count = 1, scatter = 2}}

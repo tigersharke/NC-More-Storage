@@ -81,3 +81,17 @@ nodecore.register_craft({
 		
 		toolgroups = {choppy = 5}
 	})
+
+nodecore.register_craft({
+		label = "recycle lode shelf",
+		action = "pummel",
+		indexkeys = {modname .. ":shelf_lode_hot"},
+		nodes = {
+			{match = modname .. ":shelf_lode_hot",
+			replace = modname .. ":shelf_toolrack_annealed"},
+			{y = -1, match = "nc_lode:block_tempered"}
+			},
+		items = {{name = "nc_lode:prill_hot", count = 1, scatter = 2}},
+		
+		toolgroups = {choppy = 5}
+	})
