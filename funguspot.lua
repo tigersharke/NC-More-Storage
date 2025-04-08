@@ -26,7 +26,7 @@ minetest.register_node(modname .. ":composter", {
 			moist = 1,
 			soil = 4,
 			fungal = 1,
-			humus = 1,
+			humus = 1
 		},
 		paramtype = "light",
 		sounds = nodecore.sounds("nc_tree_woody"),
@@ -38,11 +38,55 @@ minetest.register_node(modname .. ":composter", {
 		end
 	})
 
+-- There is surely a more compact way to do this but since I do not know how, I duplicated the recipe for the variant mycelium
+
 nodecore.register_craft({
 		label = "assemble composter",
 		action = "stackapply",
 		indexkeys = {modname.. ":shelf_wood_barrel"},
-		wield = {name = "wc_naturae:mycelium_loose"},
+		wield = {name = "wc_fungi:mycelium_1_loose"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = modname.. ":shelf_wood_barrel", empty = true},
+				replace = modname .. ":composter"
+			},
+		}
+	})
+
+nodecore.register_craft({
+		label = "assemble composter",
+		action = "stackapply",
+		indexkeys = {modname.. ":shelf_wood_barrel"},
+		wield = {name = "wc_fungi:mycelium_2_loose"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = modname.. ":shelf_wood_barrel", empty = true},
+				replace = modname .. ":composter"
+			},
+		}
+	})
+
+nodecore.register_craft({
+		label = "assemble composter",
+		action = "stackapply",
+		indexkeys = {modname.. ":shelf_wood_barrel"},
+		wield = {name = "wc_fungi:mycelium_3_loose"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = modname.. ":shelf_wood_barrel", empty = true},
+				replace = modname .. ":composter"
+			},
+		}
+	})
+
+nodecore.register_craft({
+		label = "assemble composter",
+		action = "stackapply",
+		indexkeys = {modname.. ":shelf_wood_barrel"},
+		wield = {name = "wc_fungi:mycelium_4_loose"},
 		consumewield = 1,
 		nodes = {
 			{
