@@ -37,12 +37,14 @@ minetest.register_node(modname .. ":shelf_thorns", {
 		end
 	})
 
+-- It seems weird for this to consume 8 thornbriar_loose but succeeds to construct with at least one. Changed.
+
 nodecore.register_craft({
 		label = "assemble thorny basket",
 		action = "stackapply",
 		indexkeys = {"nc_woodwork:form"},
 		wield = {name = "wc_naturae:thornbriar_loose"},
-		consumewield = 8,
+		consumewield = 1,
 		nodes = {
 			{
 				match = {name = "nc_woodwork:form", empty = true},
