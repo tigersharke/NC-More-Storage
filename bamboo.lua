@@ -59,6 +59,23 @@ minetest.register_node(modname .. ":shelf_bamboo", {
 		end
 	})
 
+-- IMHO, it is too difficult to know what size bamboo to use, and dead or living.
+-- Just increase variants of the dead bamboo to make this less impossible to discover.
+
+nodecore.register_craft({
+		label = "assemble bamboo shelf",
+		action = "stackapply",
+		indexkeys = {"nc_woodwork:form"},
+		wield = {name = "wc_naturae:bamboo_dead_1"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = "nc_woodwork:form", empty = true},
+				replace = modname .. ":shelf_bamboo"
+			},
+		}
+	})
+
 nodecore.register_craft({
 		label = "assemble bamboo shelf",
 		action = "stackapply",
@@ -72,12 +89,110 @@ nodecore.register_craft({
 			},
 		}
 	})
+
+nodecore.register_craft({
+		label = "assemble bamboo shelf",
+		action = "stackapply",
+		indexkeys = {"nc_woodwork:form"},
+		wield = {name = "wc_naturae:bamboo_dead_3"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = "nc_woodwork:form", empty = true},
+				replace = modname .. ":shelf_bamboo"
+			},
+		}
+	})
+
+nodecore.register_craft({
+		label = "assemble bamboo shelf",
+		action = "stackapply",
+		indexkeys = {"nc_woodwork:form"},
+		wield = {name = "wc_naturae:bamboo_dead_4"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = "nc_woodwork:form", empty = true},
+				replace = modname .. ":shelf_bamboo"
+			},
+		}
+	})
+
+nodecore.register_craft({
+		label = "assemble bamboo shelf",
+		action = "stackapply",
+		indexkeys = {"nc_woodwork:form"},
+		wield = {name = "wc_naturae:bamboo_dead_5"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = "nc_woodwork:form", empty = true},
+				replace = modname .. ":shelf_bamboo"
+			},
+		}
+	})
+	
+nodecore.register_craft({
+		label = "assemble bamboo basket",
+		action = "stackapply",
+		indexkeys = {modname.. ":shelf_bamboo"},
+		wield = {name = "wc_naturae:bamboo_dead_1"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = modname.. ":shelf_bamboo", empty = true},
+				replace = modname .. ":shelf_bamboo_basket"
+			},
+		}
+	})
 	
 nodecore.register_craft({
 		label = "assemble bamboo basket",
 		action = "stackapply",
 		indexkeys = {modname.. ":shelf_bamboo"},
 		wield = {name = "wc_naturae:bamboo_dead_2"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = modname.. ":shelf_bamboo", empty = true},
+				replace = modname .. ":shelf_bamboo_basket"
+			},
+		}
+	})
+	
+nodecore.register_craft({
+		label = "assemble bamboo basket",
+		action = "stackapply",
+		indexkeys = {modname.. ":shelf_bamboo"},
+		wield = {name = "wc_naturae:bamboo_dead_3"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = modname.. ":shelf_bamboo", empty = true},
+				replace = modname .. ":shelf_bamboo_basket"
+			},
+		}
+	})
+	
+nodecore.register_craft({
+		label = "assemble bamboo basket",
+		action = "stackapply",
+		indexkeys = {modname.. ":shelf_bamboo"},
+		wield = {name = "wc_naturae:bamboo_dead_4"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = modname.. ":shelf_bamboo", empty = true},
+				replace = modname .. ":shelf_bamboo_basket"
+			},
+		}
+	})
+	
+nodecore.register_craft({
+		label = "assemble bamboo basket",
+		action = "stackapply",
+		indexkeys = {modname.. ":shelf_bamboo"},
+		wield = {name = "wc_naturae:bamboo_dead_5"},
 		consumewield = 1,
 		nodes = {
 			{
