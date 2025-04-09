@@ -44,3 +44,21 @@ nodecore.register_craft({
 			},
 		}
 	})
+
+nc.register_craft({
+        label = "recycle chromatic cauldron",
+        action = "pummel",
+        toolgroups = {thumpy = 3},
+        indexkeys = {modname .. ":shelf_frost"},
+        nodes = {
+            {
+                match = modname .. ":shelf_frost",
+                replace = "air"
+            }
+        },
+        items = {
+                {name = "nc_lode:form", count = 1, scatter = 3},
+                {name = "nc_optics:glass_crude", count = 1, scatter = 3}
+        }
+
+    })
