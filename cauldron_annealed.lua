@@ -1,3 +1,6 @@
+--[[
+-- Since this is duplicated, lets make it null just in case.
+
 -- LUALOCALS < ---------------------------------------------------------
 local minetest, nodecore
     = minetest, nodecore
@@ -48,3 +51,4 @@ nodecore.register_craft({
 			},
 		}
 	})
+--]]

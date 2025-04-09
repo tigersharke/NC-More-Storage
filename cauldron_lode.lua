@@ -67,6 +67,59 @@ nodecore.register_craft({
 			},
 		}
 	})
+
+nodecore.register_craft({
+		label = "assemble cauldron",
+		action = "stackapply",
+		
+		indexkeys = {"nc_lode:form"},
+		wield = {name = "nc_lode:block_annealed"},
+		consumewield = 1,
+		nodes = {
+			{
+				match = {name = "nc_lode:form", empty = true},
+				replace = modname .. ":shelf_cauldron_annealed"
+			},
+		}
+	})
+
+nc.register_craft({
+		label = "recycle annealed cauldron",
+		action = "pummel",
+		toolgroups = {choppy = 3},
+		indexkeys = {modname .. ":shelf_cauldron_annealed"},
+		nodes = {
+			{
+				match = modname .. ":shelf_cauldron_annealed",
+				replace = "air"
+			}
+		},
+		items = {
+				{name = "nc_lode:rod_annealed", count = 1, scatter = 3},
+				{name = "nc_lode:rod_annealed", count = 1, scatter = 3},
+				{name = "nc_lode:block_annealed", count = 1, scatter = 2}
+		}
+
+	})
+
+nc.register_craft({
+		label = "recycle cauldron",
+		action = "pummel",
+		toolgroups = {choppy = 3},
+		indexkeys = {modname .. ":shelf_cauldron_hot"},
+		nodes = {
+			{
+				match = modname .. ":shelf_cauldron_hot",
+				replace = "air"
+			}
+		},
+		items = {
+				{name = "nc_lode:rod_hot", count = 1, scatter = 3},
+				{name = "nc_lode:rod_hot", count = 1, scatter = 3},
+				{name = "nc_lode:block_hot", count = 1, scatter = 2}
+		}
+
+	})
 	
 nodecore.register_craft({
 		label = "assemble tempered cauldron",
