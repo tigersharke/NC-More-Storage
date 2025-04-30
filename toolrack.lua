@@ -1,9 +1,9 @@
 -- LUALOCALS < ---------------------------------------------------------
-local minetest, nodecore
-    = minetest, nodecore
+local minetest, core, nodecore, nc
+	= minetest, core, nodecore, nc
 -- LUALOCALS > ---------------------------------------------------------
 
-local modname = minetest.get_current_modname()
+local modname = core.get_current_modname()
 
 local function temper(name, desc, sound, glow, dmg)
 
@@ -11,11 +11,11 @@ local form = "nc_lode_"..name..".png^[mask:nc_api_storebox_frame.png"
 
 local side = "(nc_lode_"..name..".png^[mask:nc_lode_shelf_base.png)^(" .. form .. ")"
 
-minetest.register_node(modname .. ":shelf_toolrack_" ..name, {
+core.register_node(modname .. ":shelf_toolrack_" ..name, {
 		description = desc.. " Lode Tool Rack",
 		tiles = {form, side, form},
-		selection_box = nodecore.fixedbox(),
-		collision_box = nodecore.fixedbox(),
+		selection_box = nc.fixedbox(),
+		collision_box = nc.fixedbox(),
 		groups = {
 			cracky = 3,
 			visinv = 1,
@@ -28,7 +28,7 @@ minetest.register_node(modname .. ":shelf_toolrack_" ..name, {
 		},
 		paramtype = "light",
 		sunlight_propagates = true,
-		sounds = nodecore.sounds(sound),
+		sounds = nc.sounds(sound),
 		storebox_access = function(pt) return pt.above.y >= pt.under.y end,
 	})
 
@@ -38,7 +38,7 @@ temper("annealed",	"Annealed",	"nc_lode_annealed",	false,	0)
 temper("tempered",	"Tempered",	"nc_lode_tempered",	false,	0)
 temper("hot",		"Glowing",	"nc_lode_annealed",	true,	0)
 
-nodecore.register_craft({
+nc.register_craft({
 	label = "heat lode toolrack",
 	action = "cook",
 	touchgroups = {flame = 3},
@@ -53,8 +53,37 @@ nodecore.register_craft({
 	}
 })
 
+nc.register_craft({
+		label = "hot toolrack annealing",
+		action = "cook",
+		touchgroups = {flame = 0},
+		neargroups = {coolant = 0},
+		duration = 30,
+		priority = -1,
+		cookfx = {smoke = true, hiss = true},
+		nodes = {
+			{
+				match = {name = modname .. ":shelf_toolrack_hot"},
+				replace = modname .. ":shelf_toolrack_annealed"
+			}
+		}
+	})
 
-nodecore.register_craft({
+nc.register_craft({
+		label = "hot toolrack quenching",
+		action = "cook",
+		touchgroups = {flame = 0},
+		neargroups = {coolant = 1},
+		cookfx = true,
+		nodes = {
+			{
+				match = {name = modname .. ":shelf_toolrack_hot"},
+				replace = modname .. ":shelf_toolrack_tempered"
+			}
+		}
+	})
+
+nc.register_craft({
 	label = "assemble toolrack",
 	action = "stackapply",
 	indexkeys = {"nc_lode:form"},
@@ -68,31 +97,32 @@ nodecore.register_craft({
 	}
 })
 	
-nodecore.register_craft({
-	label = "assemble tempered toolrack",
-	action = "stackapply",
-	indexkeys = {"nc_lode:form"},
-	wield = {name = "nc_lode:prill_tempered"},
-	consumewield = 1,
-	nodes = {
-		{
-			match = {name = "nc_lode:form", empty = true},
-			replace = modname .. ":shelf_toolrack_tempered"
-		},
-	}
-})
+-- With quench method instead, this is not needed.
 
-nodecore.register_craft({
+--nc.register_craft({
+--	label = "assemble tempered toolrack",
+--	action = "stackapply",
+--	indexkeys = {"nc_lode:form"},
+--	wield = {name = "nc_lode:prill_tempered"},
+--	consumewield = 1,
+--	nodes = {
+--		{
+--			match = {name = "nc_lode:form", empty = true},
+--			replace = modname .. ":shelf_toolrack_tempered"
+--		},
+--	}
+--})
+
+nc.register_lode_anvil_recipe(-1, function(temper) return {
 	label = "disassemble toolrack",
 	action = "pummel",
-	duration = 4,
-	toolgroups = {choppy = 5},
+	toolgroups = {choppy = 4},
 	indexkeys = {modname..":shelf_toolrack_hot"},
 	nodes = {{match = {name = modname..":shelf_toolrack_hot", empty = true}, replace = "nc_lode:form"}},
 	items = {{name = "nc_lode:prill_hot", count = 1, scatter = 2}}
-})
+} end )
 
-nodecore.register_craft({
+nc.register_craft({
 	label = "disassemble toolrack",
 	action = "pummel",
 	duration = 4,

@@ -3,7 +3,7 @@ local minetest, nodecore
     = minetest, nodecore
 -- LUALOCALS > ---------------------------------------------------------
 
-local modname = minetest.get_current_modname()
+local modname = core.get_current_modname()
 
 local function temper(name, desc, sound, glow, dmg)
 
@@ -11,11 +11,11 @@ local form = "nc_lode_"..name..".png^[mask:nc_api_storebox_frame.png"
 
 local side = "nc_lode_"..name..".png^(" .. form .. ")"
 
-minetest.register_node(modname .. ":shelf_lode_" ..name, {
+core.register_node(modname .. ":shelf_lode_" ..name, {
 		description = desc.. " Lode Shelf",
 		tiles = {form, side, side},
-		selection_box = nodecore.fixedbox(),
-		collision_box = nodecore.fixedbox(),
+		selection_box = nc.fixedbox(),
+		collision_box = nc.fixedbox(),
 		groups = {
 			cracky = 3,
 			visinv = 1,
@@ -29,7 +29,7 @@ minetest.register_node(modname .. ":shelf_lode_" ..name, {
 		},
 		paramtype = "light",
 		sunlight_propagates = true,
-		sounds = nodecore.sounds(sound),
+		sounds = nc.sounds(sound),
 		storebox_access = function(pt) return pt.above.y == pt.under.y end,
 	})
 
@@ -39,7 +39,7 @@ temper("annealed",	"Annealed",	"nc_lode_annealed",	false,	0)
 temper("tempered",	"Tempered",	"nc_lode_tempered",	false,	0)
 temper("hot",		"Glowing",	"nc_lode_annealed",	true,	0)
 
-nodecore.register_craft({
+nc.register_craft({
 		label = "assemble lode shelf",
 		action = "stackapply",
 		indexkeys = {"nc_lode:form"},
@@ -53,7 +53,7 @@ nodecore.register_craft({
 		}
 	})
 
-nodecore.register_craft({
+nc.register_craft({
 		label = "heat lode shelf",
 		action = "cook",
 		touchgroups = {flame = 3},
@@ -68,8 +68,38 @@ nodecore.register_craft({
 		}
 	})
 
+nc.register_craft({
+        label = "hot shelf annealing",
+        action = "cook",
+        touchgroups = {flame = 0},
+        neargroups = {coolant = 0},
+        duration = 30,
+        priority = -1,
+        cookfx = {smoke = true, hiss = true},
+        nodes = {
+            {
+                match = {name = modname .. ":shelf_lode_hot"},
+                replace = modname .. ":shelf_lode_annealed"
+            }
+        }
+    })
 
-nodecore.register_craft({
+nc.register_craft({
+        label = "hot shelf quenching",
+        action = "cook",
+        touchgroups = {flame = 0},
+        neargroups = {coolant = 1},
+        cookfx = true,
+        nodes = {
+            {
+                match = {name = modname .. ":shelf_lode_hot"},
+                replace = modname .. ":shelf_lode_tempered"
+            }
+        }
+    })
+
+
+nc.register_craft({
 		label = "recycle lode shelf",
 		action = "pummel",
 		indexkeys = {modname .. ":shelf_lode_annealed"},
@@ -82,7 +112,7 @@ nodecore.register_craft({
 		toolgroups = {choppy = 5}
 	})
 
-nodecore.register_craft({
+nc.register_craft({
 		label = "recycle lode shelf",
 		action = "pummel",
 		indexkeys = {modname .. ":shelf_lode_hot"},

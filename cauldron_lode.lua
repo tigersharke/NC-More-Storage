@@ -1,9 +1,9 @@
 -- LUALOCALS < ---------------------------------------------------------
-local minetest, nodecore
-    = minetest, nodecore
+local minetest, core, nodecore, nc
+    = minetest, core, nodecore, nc
 -- LUALOCALS > ---------------------------------------------------------
 
-local modname = minetest.get_current_modname()
+local modname = core.get_current_modname()
 
 local function temper(name, desc, sound, glow, dmg)
 
@@ -11,11 +11,11 @@ local form = "nc_lode_"..name..".png^[mask:nc_api_storebox_frame.png"
 
 local side = "nc_lode_"..name..".png^(" .. form .. ")"
 
-minetest.register_node(modname .. ":shelf_cauldron_"..name, {
+core.register_node(modname .. ":shelf_cauldron_"..name, {
 		description = desc.. " Lode Cauldron",
 		tiles = {side, side, form},
-		selection_box = nodecore.fixedbox(),
-		collision_box = nodecore.fixedbox(),
+		selection_box = nc.fixedbox(),
+		collision_box = nc.fixedbox(),
 		groups = {
 			cracky = 3,
 			visinv = 1,
@@ -29,7 +29,7 @@ minetest.register_node(modname .. ":shelf_cauldron_"..name, {
 		},
 		paramtype = "light",
 		sunlight_propagates = true,
-		sounds = nodecore.sounds(sound),
+		sounds = nc.sounds(sound),
 		storebox_access = function(pt) return pt.above.y > pt.under.y end,
 	})
 
@@ -37,7 +37,7 @@ end
 
 temper("annealed",	"Annealed",	"nc_lode_annealed",	false,	0)
 temper("tempered",	"Tempered",	"nc_lode_tempered",	false,	0)
-temper("hot",		"Glowing",	"nc_lode_annealed",	false,	0)
+temper("hot",		"Glowing",	"nc_lode_annealed",	true,	0)
 
 nc.register_craft({
 		label = "heat lode cauldron",
@@ -150,17 +150,19 @@ nc.register_lode_anvil_recipe(-1, function(temper) return {
 			}
 	 end )
 	
-nodecore.register_craft({
-		label = "assemble tempered cauldron",
-		action = "stackapply",
-		indexkeys = {"nc_lode:form"},
-		wield = {name = "nc_lode:block_tempered"},
-		consumewield = 1,
-		nodes = {
-			{
-				match = {name = "nc_lode:form", empty = true},
-				replace = modname .. ":shelf_cauldron_tempered"
-			},
-		}
-	})
+-- With quench method for tempering this is not needed.
+
+--nc.register_craft({
+--		label = "assemble tempered cauldron",
+--		action = "stackapply",
+--		indexkeys = {"nc_lode:form"},
+--		wield = {name = "nc_lode:block_tempered"},
+--		consumewield = 1,
+--		nodes = {
+--			{
+--				match = {name = "nc_lode:form", empty = true},
+--				replace = modname .. ":shelf_cauldron_tempered"
+--			},
+--		}
+--	})
 
