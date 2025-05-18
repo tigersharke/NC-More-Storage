@@ -26,6 +26,7 @@ minetest.register_node(modname .. ":shelf_lode_barrel", {
 		description = "Reinforced Wooden Barrel",
 		tiles = {wood, open, form},
 		use_texture_alpha = "blend",
+		backface_culling = false,
 		selection_box = nodecore.fixedbox(),
 		collision_box = nodecore.fixedbox(),
 		groups = {

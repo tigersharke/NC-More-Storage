@@ -2,8 +2,8 @@
 local minetest, nodecore
     = minetest, nodecore
 -- LUALOCALS > ---------------------------------------------------------
-local modname = minetest.get_current_modname()
-local get_node = minetest.get_node
+local modname = core.get_current_modname()
+local get_node = core.get_node
 ------------------------------------------------------------------------
 local barrelwet = modname .. ":shelf_water_barrel"
 local barreldry = modname .. ":shelf_wood_barrel"
@@ -30,15 +30,17 @@ local function soakup(pos)
 	local any
 	for _, p in pairs(findwater(pos)) do
 		nodecore.node_sound(p, "dig")
-		minetest.remove_node(p)
+		core.remove_node(p)
 		any = true
 	end
 	return any
 end
 -- ================================================================== --
-minetest.register_node(modname .. ":shelf_wood_barrel", {
+core.register_node(modname .. ":shelf_wood_barrel", {
 		description = "Wooden Barrel",
-		tiles = {wood, wood, bark},
+		tiles = {wood, open, bark},
+		use_texture_alpha = "blend",
+        backface_culling = false,
 		selection_box = nodecore.fixedbox(),
 		collision_box = nodecore.fixedbox(),
 		groups = {
@@ -55,7 +57,7 @@ minetest.register_node(modname .. ":shelf_wood_barrel", {
 		sounds = nodecore.sounds("nc_tree_woody"),
 		storebox_access = function(pt) return pt.above.y > pt.under.y end,
 		on_ignite = function(pos)
-			if minetest.get_node(pos).name == modname .. ":shelf_wood_barrel" then
+			if core.get_node(pos).name == modname .. ":shelf_wood_barrel" then
 				return nodecore.stack_get(pos)
 			end
 		end
@@ -75,7 +77,7 @@ nodecore.register_craft({
 		}
 	})
 -- ================================================================== --
-minetest.register_node(modname .. ":shelf_wood_barrel_lid", {
+core.register_node(modname .. ":shelf_wood_barrel_lid", {
 		description = "Closed Wooden Barrel",
 		tiles = {wood, wood, lid},
 		selection_box = nodecore.fixedbox(),
@@ -93,16 +95,15 @@ minetest.register_node(modname .. ":shelf_wood_barrel_lid", {
 		sounds = nodecore.sounds("nc_tree_woody"),
 		storebox_access = function(pt) return pt.above.y > pt.under.y end,
 		on_ignite = function(pos)
-			if minetest.get_node(pos).name == modname .. ":shelf_wood_barrel_lid" then
+			if core.get_node(pos).name == modname .. ":shelf_wood_barrel_lid" then
 				return nodecore.stack_get(pos)
 			end
 		end
 	})
 -- ================================================================== --
-minetest.register_node(modname .. ":shelf_water_barrel", {
+core.register_node(modname .. ":shelf_water_barrel", {
 		description = "Water Barrel",
 		tiles = {wood, wood, top},
-		use_texture_alpha = "blend",
 		selection_box = nodecore.fixedbox(),
 		collision_box = nodecore.fixedbox(),
 		groups = {
@@ -120,7 +121,7 @@ minetest.register_node(modname .. ":shelf_water_barrel", {
 		sounds = nodecore.sounds("nc_tree_woody"),
 		storebox_access = function(pt) return pt.above.y > pt.under.y end,
 		on_ignite = function(pos)
-			if minetest.get_node(pos).name == modname .. ":shelf_water_barrel" then
+			if core.get_node(pos).name == modname .. ":shelf_water_barrel" then
 				return nodecore.stack_get(pos)
 			end
 		end
@@ -140,7 +141,7 @@ nodecore.register_craft({
 		}
 	})
 -- ================================================================== --
-minetest.register_abm({
+core.register_abm({
 		label = "fill water barrel",
 		interval = 1,
 		chance = 10,
